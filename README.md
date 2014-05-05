@@ -1,4 +1,6 @@
-burst-ballons
+burst-balloons
 =============
 
-HTML5 Burst Balloon - Monkey Game
+Burst Balloons is HTML5 Game in which a monkey burst balloons, we have used http://craftyjs.com/ framework.
+
+
