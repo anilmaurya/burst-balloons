@@ -19,7 +19,7 @@ Game = {
 
     start: function(){
         Crafty.init(Game.width(), Game.height());
-        Crafty.background('blue');
+        Crafty.background('lightslategray');
         Crafty.scene('Loading');
     }
 }
