@@ -27,3 +27,9 @@ Crafty.c('Player', {
         .multiway({x: 1, y: 4}, {UP_ARROW: -90, DOWN_ARROW: 90});
     }
 });
+
+Crafty.c('Player1', {
+    init: function(){
+        this.requires('Actor, ready_monkey')
+    }
+});
