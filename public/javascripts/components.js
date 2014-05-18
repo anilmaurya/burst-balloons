@@ -31,6 +31,12 @@ Crafty.c('Grass', {
         this.requires('Actor, Solid, grass')
     },
 })
+
+Crafty.c('Score', {
+    init: function(){
+        this.requires('2D, DOM, Text')
+    }
+})
 /*
    To move player in multi direction
 
@@ -120,6 +126,7 @@ Crafty.c("Balloon",{
     init: function(){
         this.requires('2D, DOM, balloon, Collision')
         this.onHit('Solid', this.DestroyBalloon);
+        this.onHit('bullet', this.DestroyBalloon);
         this.bind('EnterFrame', function(){
             this.move('n', Crafty.math.randomNumber(0.6, 4));
         });

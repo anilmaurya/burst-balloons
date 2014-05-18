@@ -9,6 +9,8 @@ Game = {
         }
     },
 
+    score: 0,
+
     width: function(){
         return this.map_grid.width * this.map_grid.tile.width;
     },
