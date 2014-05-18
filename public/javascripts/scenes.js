@@ -11,12 +11,12 @@ Crafty.scene('Game', function(){
     for (var x = 0; x < Game.map_grid.width; x++) {
         var increment_stair_length = false;
         for (var y = 0; y < Game.map_grid.height; y++){
-            var at_edge = x == 0 || x > Game.map_grid.width - 3  || y == 0 || y > Game.map_grid.height - 3;
+            var at_edge = x == 0 || x > Game.map_grid.width - 2  || y == 0 || y > Game.map_grid.height - 2;
             if (at_edge) {
                 Crafty.e('Wall').at(x,y);
             }
-            if (y > stair_height && x <= stair_length){
-                Crafty.e('Wall').at(x,y);
+            if ( !at_edge && y > stair_height && x <= stair_length){
+                Crafty.e('Grass').at(x,y);
                 increment_stair_length = true;
             }
         }
@@ -29,11 +29,11 @@ Crafty.scene('Game', function(){
     var player = Crafty.e('2D, object, Player, DOM, collision, twoway').attr({
         x: 50,
         y: 50
-    }).gravity('Wall').twoway(7).gravityConst(1);
+    }).gravity('Solid').twoway(7).gravityConst(1);
     player.bind('KeyDown', function(e){
         if(e.key == Crafty.keys.SPACE){
-            bullet_x = this.x + 32;
-            bullet_y = this.y + 30;
+            bullet_x = this.x + 20;
+            bullet_y = this.y + 20;
             if(this.facingRight){
                 bullet_dir = 'e';
                 this.animate('ShootRight', 1);
@@ -42,7 +42,7 @@ Crafty.scene('Game', function(){
                 bullet_dir = 'w';
                 this.animate('ShootLeft', 1);
             }
-            Crafty.e('bullet').attr({x: bullet_x, y: (this.y + 30), z: 50}).bullet(bullet_dir);
+            Crafty.e('bullet').attr({x: bullet_x, y: bullet_y, z: 50}).bullet(bullet_dir);
         }
     })
 
@@ -51,10 +51,11 @@ Crafty.scene('Game', function(){
 Crafty.scene('Loading', function(){
     Crafty.e('2D, DOM, Text')
         .text('Loading....');
-    Crafty.load(['/images/wall.jpg', '/images/transparent.png', '/images/fire.png'], function(){
+    Crafty.load(['/images/wall.jpg', '/images/transparent.png', '/images/fire.png', '/images/grass.jpg'], function(){
         Crafty.sprite(50, 50, '/images/wall.jpg', {wall: [1,0]});
         Crafty.sprite('/images/fire.png', {fire: [0,0, 50, 50]});
-        Crafty.sprite(68, 80, '/images/transparent.png', {
+        Crafty.sprite('/images/grass.jpg', {grass: [0,0, 50, 50]});
+        Crafty.sprite(68, 78, '/images/transparent.png', {
             happy_monkey: [0, 0],
             ready_monkey: [4, 0]
         });

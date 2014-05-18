@@ -26,6 +26,11 @@ Crafty.c('Wall', {
         this.requires('Actor, Solid, wall')
     },
 })
+Crafty.c('Grass', {
+    init: function(){
+        this.requires('Actor, Solid, grass')
+    },
+})
 /*
    To move player in multi direction
 
@@ -74,8 +79,12 @@ Crafty.c('Player', {
         .reel('PlayerLeft', 5, 1, 1, 1)
         .reel('ShootRight', 500, [[4, 0], [3, 0]])
         .reel('ShootLeft', 500, [[2, 1], [1, 1]])
-        .attr({facingRight: true})
-        .stopOnSolids();
+        .attr({facingRight: true});
+    this.onHit('Solid', function(){
+        this.stopAnimation();
+        this.stopMovement();
+        return this;
+    }),
     this.bind('NewDirection', function(data){
         if(data.x > 0) {
             this.facingRight = true
@@ -84,26 +93,24 @@ Crafty.c('Player', {
             this.facingRight = false
             this.animate('PlayerMovingLeft', -1); 
         } else {
-            if(this.facingRight){
-                this.animate('PlayerRight', -1); 
-            }
-            else{
-                this.animate('PlayerLeft', -1); 
-            }
+            this.stopAnimation();
             //this.animate('stop', animation_speed, -1); 
         }
     })
     },
-    stopOnSolids: function(){
-        this.onHit('Solid', this.stopMovement);
-        return this;
+    stopAnimation: function(){
+        if(this.facingRight){
+            this.animate('PlayerRight', -1); 
+        }
+        else{
+            this.animate('PlayerLeft', -1); 
+        }
     },
     stopMovement: function(){
-        this._speed = 0;
-        if (this._movement){
-            this.x -= this._movement.x;
-            this.y -= this._movement.y;
+        if (this._speed != 0 && !this.facingRight){
+            this.x += this._speed;
         }
+        return this;
     }
 });
 
