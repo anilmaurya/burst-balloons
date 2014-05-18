@@ -81,7 +81,7 @@ Crafty.c('Player', {
         .reel('ShootLeft', 500, [[2, 1], [1, 1]])
         .attr({facingRight: true});
     this.onHit('Solid', function(){
-        this.stopAnimation();
+        //this.stopAnimation();
         this.stopMovement();
         return this;
     }),
@@ -114,7 +114,22 @@ Crafty.c('Player', {
     }
 });
 
-//create the bullet component 
+//create balloon component
+
+Crafty.c("Balloon",{
+    init: function(){
+        this.requires('2D, DOM, balloon, Collision')
+        this.onHit('Solid', this.DestroyBalloon);
+        this.bind('EnterFrame', function(){
+            this.move('n', Crafty.math.randomNumber(0.6, 4));
+        });
+    },
+    DestroyBalloon: function(){
+        this.destroy();
+    },
+
+})
+//create  bullet component 
 Crafty.c("bullet", {
     init: function(){
         this.requires('2D, DOM, fire, Collision')

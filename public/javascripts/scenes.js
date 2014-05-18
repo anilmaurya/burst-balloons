@@ -6,6 +6,12 @@ Crafty.scene('Game', function(){
         player.y = Crafty.mousePos.y;
     });
     */
+    this.bind('EnterFrame', function(){
+        if(Crafty('Balloon').length < 5){
+            Crafty.e('Balloon').attr({x: Crafty.math.randomNumber(Game.width()/2,Game.width()), y: (Game.height()*(3/4))});
+        }
+    });
+
     var stair_length = 5;
     var stair_height = (1/3)* Game.map_grid.height;
     for (var x = 0; x < Game.map_grid.width; x++) {
@@ -46,15 +52,17 @@ Crafty.scene('Game', function(){
         }
     })
 
+
 });
 
 Crafty.scene('Loading', function(){
     Crafty.e('2D, DOM, Text')
         .text('Loading....');
-    Crafty.load(['/images/wall.jpg', '/images/transparent.png', '/images/fire.png', '/images/grass.jpg'], function(){
+    Crafty.load(['/images/wall.jpg', '/images/transparent.png', '/images/fire.png', '/images/grass.jpg', '/images/balloon.png'], function(){
         Crafty.sprite(50, 50, '/images/wall.jpg', {wall: [1,0]});
         Crafty.sprite('/images/fire.png', {fire: [0,0, 50, 50]});
         Crafty.sprite('/images/grass.jpg', {grass: [0,0, 50, 50]});
+        Crafty.sprite('/images/balloon.png', {balloon: [0,0, 30, 50]});
         Crafty.sprite(68, 78, '/images/transparent.png', {
             happy_monkey: [0, 0],
             ready_monkey: [4, 0]
