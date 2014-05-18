@@ -36,11 +36,13 @@ Crafty.scene('Game', function(){
             bullet_y = this.y + 30;
             if(this.facingRight){
                 bullet_dir = 'e';
+                this.animate('ShootRight', 1);
             }
             else{
                 bullet_dir = 'w';
+                this.animate('ShootLeft', 1);
             }
-            Crafty.e('bullet').attr({x: bullet_x, y: (this.y + 30), w: 10, h: 5, z: 50}).color("rgb(250,0,0)").bullet(bullet_dir);
+            Crafty.e('bullet').attr({x: bullet_x, y: (this.y + 30), z: 50}).bullet(bullet_dir);
         }
     })
 
@@ -49,8 +51,9 @@ Crafty.scene('Game', function(){
 Crafty.scene('Loading', function(){
     Crafty.e('2D, DOM, Text')
         .text('Loading....');
-    Crafty.load(['/images/wall.jpg', '/images/transparent.png'], function(){
+    Crafty.load(['/images/wall.jpg', '/images/transparent.png', '/images/fire.png'], function(){
         Crafty.sprite(50, 50, '/images/wall.jpg', {wall: [1,0]});
+        Crafty.sprite('/images/fire.png', {fire: [0,0, 50, 50]});
         Crafty.sprite(68, 80, '/images/transparent.png', {
             happy_monkey: [0, 0],
             ready_monkey: [4, 0]

@@ -72,22 +72,23 @@ Crafty.c('Player', {
         .reel('PlayerMovingRight', 500, 3, 0, 3)
         .reel('PlayerRight', 5, 3, 0, 1)
         .reel('PlayerLeft', 5, 1, 1, 1)
+        .reel('ShootRight', 500, [[4, 0], [3, 0]])
+        .reel('ShootLeft', 500, [[2, 1], [1, 1]])
         .attr({facingRight: true})
         .stopOnSolids();
-    var animation_speed = 8;
     this.bind('NewDirection', function(data){
         if(data.x > 0) {
             this.facingRight = true
-            this.animate('PlayerMovingRight', animation_speed, -1);
+            this.animate('PlayerMovingRight', -1);
         } else if (data.x < 0){
             this.facingRight = false
-            this.animate('PlayerMovingLeft', animation_speed, -1); 
+            this.animate('PlayerMovingLeft', -1); 
         } else {
             if(this.facingRight){
-                this.animate('PlayerRight', animation_speed, -1); 
+                this.animate('PlayerRight', -1); 
             }
             else{
-                this.animate('PlayerLeft', animation_speed, -1); 
+                this.animate('PlayerLeft', -1); 
             }
             //this.animate('stop', animation_speed, -1); 
         }
@@ -109,7 +110,7 @@ Crafty.c('Player', {
 //create the bullet component 
 Crafty.c("bullet", {
     init: function(){
-        this.requires('2D, DOM, Color, Collision')
+        this.requires('2D, DOM, fire, Collision')
         .destroyOnHit();
     },
     destroyOnHit: function(){
