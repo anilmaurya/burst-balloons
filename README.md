@@ -3,7 +3,12 @@ burst-balloons
 
 Burst Balloons is HTML5 Game. 
 
-In this game, Player(Monkey) shoot bows to burst balloons.
+In this game, Player(Monkey) shoot arrow to burst balloons.
+
+Playing Instructions:
+
+-> Use Arrow keys to move Monkey.
+-> Use Space to shoot arrow.
 
 we have used http://craftyjs.com/ framework to make this Game.
 
