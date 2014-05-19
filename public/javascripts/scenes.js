@@ -38,17 +38,17 @@ Crafty.scene('Game', function(){
     }).gravity('Solid').twoway(7).gravityConst(1);
     player.bind('KeyDown', function(e){
         if(e.key == Crafty.keys.SPACE){
-            bullet_x = this.x + 20;
-            bullet_y = this.y + 20;
             if(this.facingRight){
                 bullet_dir = 'e';
                 this.animate('ShootRight', 1);
+                Crafty.e('bullet, right_arrow').attr({x: this.x + 35, y: this.y + 25, z: 50}).bullet(bullet_dir);
             }
             else{
                 bullet_dir = 'w';
                 this.animate('ShootLeft', 1);
+                Crafty.e('bullet, left_arrow').attr({x: this.x - 35, y: this.y + 25, z: 50}).bullet(bullet_dir);
             }
-            Crafty.e('bullet').attr({x: bullet_x, y: bullet_y, z: 50}).bullet(bullet_dir);
+            Crafty.audio.play("shoot");
         }
     })
 
@@ -58,9 +58,10 @@ Crafty.scene('Game', function(){
 Crafty.scene('Loading', function(){
     Crafty.e('2D, DOM, Text')
         .text('Loading....');
-    Crafty.load(['/images/wall.jpg', '/images/transparent.png', '/images/fire.png', '/images/grass.jpg', '/images/balloon.png'], function(){
+    Crafty.load(['/images/wall.jpg', '/images/transparent.png', '/images/left-arrow.png', '/images/grass.jpg', '/images/balloon.png', '/images/right-arrow.png'], function(){
         Crafty.sprite(50, 50, '/images/wall.jpg', {wall: [1,0]});
-        Crafty.sprite('/images/fire.png', {fire: [0,0, 50, 50]});
+        Crafty.sprite('/images/left-arrow.png', {left_arrow: [0,0, 50, 50]});
+        Crafty.sprite('/images/right-arrow.png', {right_arrow: [0,0, 50, 50]});
         Crafty.sprite('/images/grass.jpg', {grass: [0,0, 50, 50]});
         Crafty.sprite('/images/balloon.png', {balloon: [0,0, 30, 50]});
         Crafty.sprite(68, 78, '/images/transparent.png', {
@@ -68,6 +69,8 @@ Crafty.scene('Loading', function(){
             ready_monkey: [4, 0]
         });
         Crafty.scene('Game');
-    })
+    });
+    Crafty.audio.add("shoot","/sounds/bow_fire.wav");
+    Crafty.audio.add("shoot","/sounds/blast.wav");
 });
 

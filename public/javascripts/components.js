@@ -126,9 +126,12 @@ Crafty.c("Balloon",{
     init: function(){
         this.requires('2D, DOM, balloon, Collision')
         this.onHit('Solid', this.DestroyBalloon);
-        this.onHit('bullet', this.DestroyBalloon);
+        this.onHit('bullet', function(){
+            Crafty.audio.play("shoot");
+            this.DestroyBalloon();
+        });
         this.bind('EnterFrame', function(){
-            this.move('n', Crafty.math.randomNumber(0.6, 4));
+            this.move('n', Crafty.math.randomNumber(0.6, 6));
         });
     },
     DestroyBalloon: function(){
@@ -139,7 +142,7 @@ Crafty.c("Balloon",{
 //create  bullet component 
 Crafty.c("bullet", {
     init: function(){
-        this.requires('2D, DOM, fire, Collision')
+        this.requires('2D, DOM, Collision')
         .destroyOnHit();
     },
     destroyOnHit: function(){
@@ -152,7 +155,7 @@ Crafty.c("bullet", {
     },
     bullet: function(dir) {
         this.bind("EnterFrame", function() {
-            this.move(dir, 15);
+            this.move(dir, 5);
             if(this.x > Crafty.viewport.width || this.x < 0) 
             this.destroy();
         });
