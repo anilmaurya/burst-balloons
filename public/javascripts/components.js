@@ -120,22 +120,43 @@ Crafty.c('Player', {
     }
 });
 
-//create balloon component
-
-Crafty.c("Balloon",{
+//moveable component 
+Crafty.c("moveable",{
     init: function(){
-        this.requires('2D, DOM, balloon, Collision')
-        this.onHit('Solid', this.DestroyBalloon);
+        this.requires('2D, DOM, Collision')
+        this.onHit('Solid', this.DestroyObject);
         this.onHit('bullet', function(){
             Crafty.audio.play("shoot");
-            this.DestroyBalloon();
+            this.DestroyObject();
         });
+    },
+    DestroyObject: function(){
+        this.destroy();
+    },
+
+})
+
+//create fire component
+Crafty.c("Fire",{
+    init: function(){
+        this.requires('moveable, fire')
+        this.bind('EnterFrame', function(){
+            this.move('s', Crafty.math.randomNumber(0.6, 4));
+        });
+        this.onHit('Player', function(){
+            Crafty.scene('Game_Over');
+        });
+    },
+
+})
+
+//create balloon component
+Crafty.c("Balloon",{
+    init: function(){
+        this.requires('moveable, balloon')
         this.bind('EnterFrame', function(){
             this.move('n', Crafty.math.randomNumber(0.6, 6));
         });
-    },
-    DestroyBalloon: function(){
-        this.destroy();
     },
 
 })

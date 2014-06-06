@@ -9,7 +9,9 @@ Game = {
         }
     },
 
-    score: 0,
+    shoot: false,
+
+    score: 20,
 
     width: function(){
         return this.map_grid.width * this.map_grid.tile.width;
