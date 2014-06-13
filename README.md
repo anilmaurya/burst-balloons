@@ -1,3 +1,4 @@
+{<img src="http://inch-ci.org/github/anilmaurya/burst-balloons.png?branch=master" alt="Inline docs" />}[http://inch-ci.org/github/anilmaurya/burst-balloons]
 burst-balloons
 =============
 
