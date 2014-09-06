@@ -19,3 +19,8 @@ Contributors are more than welcome, please file issue with the feature you are i
 
 
 Enjoy Playing.
+
+Known Issue:
+
+Lagging Isuue on Chrome browser.
+https://github.com/craftyjs/Crafty/issues/668
