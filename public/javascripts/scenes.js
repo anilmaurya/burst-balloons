@@ -11,7 +11,7 @@ Crafty.scene('Game', function(){
             Crafty.e('Balloon').attr({x: Crafty.math.randomNumber(Game.width()/2,Game.width()), y: (Game.height()*(3/4))});
         }
         if(Crafty('Fire').length < 2){
-            Crafty.e('Fire').attr({x: Crafty.math.randomNumber(5,Game.width()/2), y: 50});
+            Crafty.e('Fire').attr({x: Crafty.math.randomNumber(Game.width()/4,Game.width()/2), y: 50});
         }
     });
 
@@ -86,5 +86,5 @@ Crafty.scene('Loading', function(){
 
 Crafty.scene('Game_Over', function(){
     Crafty.e('2D, DOM, Text')
-        .text('Game Over');
+        .text('Game Over !!! Reload Page to play again');
 })
